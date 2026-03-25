@@ -7,6 +7,15 @@ function App() {
   const [taskInput, setTaskInput] = useState("");
   const API_URL = "https://task-manager-backend-b6xb.onrender.com";
 
+  const toggleComplete = async (task) => {
+    await fetch(`${API_URL}/tasks/${tasks._id}`, {
+      method: "PUT",
+      headers: { Content_Type: "application/json" },
+      body: JSON.stringify({ completed: !task.completed }),
+    });
+    getTask();
+  };
+
   const deleteTask = async (id) => {
     try {
       await fetch(`${API_URL}/tasks/${id}`, {
@@ -52,6 +61,16 @@ function App() {
           onChange={(e) => setTaskInput(e.target.value)}
           placeholder="Enter a new task..."
         />
+        <input
+          type="checkbox"
+          checked={task.completed}
+          onChange={() => toggleComplete(task)}
+        />
+        <span
+          style={{ textDecoration: task.completed ? "line-through" : "none" }}
+        >
+          {task.name}
+        </span>
         <button type="submit">Add Task</button>
       </form>
       <ul>

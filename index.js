@@ -58,6 +58,21 @@ app.delete("/tasks/:id", async (req, res) => {
     res.status(500).json({ error: "Delete failed" });
   }
 });
+
+app.put("/tasks/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { completed } = req.body;
+    const updatedTask = await Task.findByIdAndUpdate(
+      id,
+      { completed },
+      { new: true },
+    );
+    res.json(updatedTask);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 app.listen(port, () => {
   console.log(`Server is running at http://lo1calhost:${port}`);
 });
