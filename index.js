@@ -74,5 +74,5 @@ app.put("/tasks/:id", async (req, res) => {
   }
 });
 app.listen(port, () => {
-  console.log(`Server is running at http://lo1calhost:${port}`);
+  console.log(`Server is running at http://localhost:${port}`);
 });
