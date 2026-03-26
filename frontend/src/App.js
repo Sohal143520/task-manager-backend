@@ -21,7 +21,7 @@ function App() {
         method: "DELETE",
       });
       // This line updates the screen immediately without a refresh
-      setTasks(tasks.filter((task) => task._id !== id));
+      setTasks(tasks.filter((tasks) => tasks._id !== id));
     } catch (err) {
       console.error("Delete failed:", err);
     }
