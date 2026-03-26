@@ -59,11 +59,15 @@ function App() {
     setTasks([...tasks, newTask]);
     setTaskInput("");
   };
-
+  const incompleteTasks = tasks.filter((task) => !task.completed).length;
   return (
     <div style={{ padding: "20px" }}>
       <h1>My Task List</h1>
-
+      <h3 style={{ color: incompleteTasks == 0 ? "green" : "orange" }}>
+        {incompleteTasks === 0
+          ? "All done! Nice work."
+          : `you have ${incompleteTasks} tasks remainning.`}
+      </h3>
       <form onSubmit={addTask} style={{ marginBottom: "20px" }}>
         <input
           type="text"
