@@ -12,25 +12,3 @@ code {
     monospace;
 }
 
-/* Add this to your App.css to make it look modern */
-li {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-  width: 300px;
-}
-
-button {
-  background: #ff4d4d;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #cc0000;
-}
