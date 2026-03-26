@@ -6,7 +6,7 @@ function App() {
   const [taskInput, setTaskInput] = useState("");
   const API_URL = "https://task-manager-backend-b6xb.onrender.com";
 
-  // FIX 1: Rename to getTasks (plural) and define it so you can call it later
+  // Define getTasks so it can be reused
   const getTasks = async () => {
     try {
       const res = await fetch(`${API_URL}/tasks`);
@@ -17,20 +17,22 @@ function App() {
     }
   };
 
-  // Run automatically when the page loads
   useEffect(() => {
     getTasks();
   }, []);
 
   const toggleComplete = async (task) => {
-    // FIX 2: Use task._id (single item), not tasks._id (the whole array)
-    // FIX 3: Header key should be "Content-Type" (with a hyphen)
-    await fetch(`${API_URL}/tasks/${task._id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ completed: !task.completed }),
-    });
-    getTasks(); // Call the correct function name here
+    try {
+      // Use task._id (singular) from the clicked item
+      await fetch(`${API_URL}/tasks/${task._id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" }, // Fixed "Content_Type" typo
+        body: JSON.stringify({ completed: !task.completed }),
+      });
+      getTasks(); // Changed from getTask() to getTasks()
+    } catch (err) {
+      console.error("Toggle failed:", err);
+    }
   };
 
   const deleteTask = async (id) => {
@@ -38,7 +40,7 @@ function App() {
       await fetch(`${API_URL}/tasks/${id}`, {
         method: "DELETE",
       });
-      // Updates the state locally for a fast UI feel
+      // Filter out the deleted task from the state for instant feedback
       setTasks(tasks.filter((t) => t._id !== id));
     } catch (err) {
       console.error("Delete failed:", err);
@@ -64,7 +66,6 @@ function App() {
     <div style={{ padding: "20px" }}>
       <h1>My Task List</h1>
 
-      {/* FORM: For adding new tasks */}
       <form onSubmit={addTask} style={{ marginBottom: "20px" }}>
         <input
           type="text"
@@ -75,7 +76,6 @@ function App() {
         <button type="submit">Add Task</button>
       </form>
 
-      {/* LIST: Loop through tasks and show buttons for EACH one */}
       <ul>
         {tasks.map((task) => (
           <li
