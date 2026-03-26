@@ -1,7 +1,6 @@
 import "./App.css";
 
 import React, { useState, useEffect } from "react";
-
 function App() {
   const [tasks, setTasks] = useState([]); // A place to store our tasks
   const [taskInput, setTaskInput] = useState("");
