@@ -62,22 +62,22 @@ function App() {
         />
         <input
           type="checkbox"
-          checked={task.completed}
-          onChange={() => toggleComplete(task)}
+          checked={tasks.completed}
+          onChange={() => toggleComplete(tasks)}
         />
         <span
-          style={{ textDecoration: task.completed ? "line-through" : "none" }}
+          style={{ textDecoration: tasks.completed ? "line-through" : "none" }}
         >
-          {task.name}
+          {tasks.name}
         </span>
         <button type="submit">Add Task</button>
       </form>
       <ul>
-        {tasks.map((task) => (
-          <li key={task._id} style={{ marginBottom: "10px" }}>
-            {task.title}
+        {tasks.map((tasks) => (
+          <li key={tasks._id} style={{ marginBottom: "10px" }}>
+            {tasks.title}
             <button
-              onClick={() => deleteTask(task._id)}
+              onClick={() => deleteTask(tasks._id)}
               style={{ marginLeft: "10px", color: "red" }}
             >
               Delete
