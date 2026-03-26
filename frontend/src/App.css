@@ -33,7 +33,7 @@ li{
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-  border-bottom: 1px solid orange;
+  border-bottom: 1px solid #eee;
   width: 300px;
 }
 
